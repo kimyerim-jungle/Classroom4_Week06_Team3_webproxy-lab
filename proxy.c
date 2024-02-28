@@ -132,8 +132,16 @@ void doit(int fd)
 void parse_uri(char *uri, char *hostname, char *port, char *path)
 {
     char *hostname_ptr = strstr(uri, "//") ? strstr(uri, "//") + 2 : uri;
-    char *port_ptr = strchr(hostname_ptr, ':'); // port 위치
-    char *path_ptr = strchr(hostname_ptr, '/'); // path 위치
+    char *port_ptr; // port 위치
+    char *path_ptr; // path 위치
+
+    if ((strchr(hostname_ptr, ':')) != NULL){
+        port_ptr = strchr(hostname_ptr, ':');
+    }
+    if ((strchr(hostname_ptr, '/')) != NULL){
+        path_ptr = strchr(hostname_ptr, '/');
+    }
+
     strcpy(path, path_ptr);
 
     if (port_ptr) {
